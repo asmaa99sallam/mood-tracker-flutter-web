@@ -1,2 +1,12 @@
+import 'package:flutter/material.dart';
+import '../models/mood_entry.dart';
 
-https://github.com/asmaa99sallam/mood-tracker-flutter-web.git
+class MoodViewModel extends ChangeNotifier {
+  final List<MoodEntry> moods = [];
+
+  void addMood(String mood) {
+    moods.insert(0, MoodEntry(mood: mood, date: DateTime.now()));
+
+    notifyListeners();
+  }
+}
