@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'mood_face.dart';
 
 class MoodButton extends StatelessWidget {
   final String mood;
@@ -14,23 +15,39 @@ class MoodButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTap,
+    return InkWell(
+      borderRadius: BorderRadius.circular(24),
 
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color.withOpacity(0.15),
-        foregroundColor: color,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+      onTap: onTap,
 
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      child: Container(
+        width: 170,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
 
-        elevation: 0,
-      ),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.12),
+          borderRadius: BorderRadius.circular(24),
+        ),
 
-      child: Text(
-        mood,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
 
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          children: [
+            MoodFace(mood: mood, color: color, size: 90),
+
+            const SizedBox(height: 18),
+
+            Text(
+              mood,
+
+              style: TextStyle(
+                color: color,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
