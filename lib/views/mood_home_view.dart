@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../viewmodels/mood_view_model.dart';
 import '../widgets/mood_header.dart';
 import '../widgets/mood_selector.dart';
+import '../widgets/mood_timeline.dart';
 
 class MoodHomeView extends StatefulWidget {
   const MoodHomeView({super.key});
@@ -32,6 +33,9 @@ class _MoodHomeViewState extends State<MoodHomeView> {
               const MoodHeader(),
               const SizedBox(height: 40),
               MoodSelector(onMoodSelected: _addMood),
+              const SizedBox(height: 50),
+
+              MoodTimeline(moods: viewModel.moods),
             ],
           ),
         ),
