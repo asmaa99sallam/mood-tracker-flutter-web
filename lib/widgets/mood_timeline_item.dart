@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/mood_entry.dart';
 import 'mood_face.dart';
 
-class MoodTimelineItem extends StatelessWidget {
+class MoodTimelineItem extends StatefulWidget {
   final MoodEntry moodEntry;
   final Color moodColor;
 
@@ -13,44 +13,77 @@ class MoodTimelineItem extends StatelessWidget {
   });
 
   @override
+  State<MoodTimelineItem> createState() => _MoodTimelineItemState();
+}
+
+class _MoodTimelineItemState extends State<MoodTimelineItem> {
+  double scale = 1;
+
+  void animateCard() async {
+    setState(() {
+      scale = 1.1;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 150));
+
+    setState(() {
+      scale = 1;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 140,
-      margin: const EdgeInsets.only(right: 16),
+    return GestureDetector(
+      onTap: animateCard,
 
-      padding: const EdgeInsets.all(16),
+      child: AnimatedScale(
+        duration: const Duration(milliseconds: 200),
 
-      decoration: BoxDecoration(
-        color: moodColor.withOpacity(0.12),
-        borderRadius: BorderRadius.circular(24),
-      ),
+        scale: scale,
 
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        child: Container(
+          width: 140,
+          margin: const EdgeInsets.only(right: 16),
 
-        children: [
-          Text(
-            moodEntry.mood,
+          padding: const EdgeInsets.all(16),
 
-            style: TextStyle(
-              color: moodColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
+          decoration: BoxDecoration(
+            color: widget.moodColor.withOpacity(0.12),
+            borderRadius: BorderRadius.circular(24),
           ),
 
-          const SizedBox(height: 14),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
 
-          MoodFace(mood: moodEntry.mood, color: moodColor, size: 60),
+            children: [
+              Text(
+                widget.moodEntry.mood,
 
-          const SizedBox(height: 14),
+                style: TextStyle(
+                  color: widget.moodColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
 
-          Text(
-            "${moodEntry.date.day}/${moodEntry.date.month}",
+              const SizedBox(height: 14),
 
-            style: const TextStyle(color: Colors.black54),
+              MoodFace(
+                mood: widget.moodEntry.mood,
+                color: widget.moodColor,
+                size: 60,
+              ),
+
+              const SizedBox(height: 14),
+
+              Text(
+                "${widget.moodEntry.date.day}/${widget.moodEntry.date.month}",
+
+                style: const TextStyle(color: Colors.black54),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
