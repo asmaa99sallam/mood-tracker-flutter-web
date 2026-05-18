@@ -25,18 +25,22 @@ class _MoodHomeViewState extends State<MoodHomeView> {
     return Scaffold(
       backgroundColor: const Color(0xfff7f8fc),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const MoodHeader(),
-              const SizedBox(height: 40),
-              MoodSelector(onMoodSelected: _addMood),
-              const SizedBox(height: 50),
-
-              MoodTimeline(moods: viewModel.moods),
-            ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1100),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const MoodHeader(),
+                  const SizedBox(height: 40),
+                  MoodSelector(onMoodSelected: _addMood),
+                  const SizedBox(height: 50),
+                  MoodTimeline(moods: viewModel.moods),
+                ],
+              ),
+            ),
           ),
         ),
       ),

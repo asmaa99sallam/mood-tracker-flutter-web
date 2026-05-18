@@ -22,6 +22,19 @@ class MoodTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (moods.isEmpty) {
+      return Container(
+        height: 170,
+
+        alignment: Alignment.center,
+
+        child: const Text(
+          "No moods added yet",
+          style: TextStyle(fontSize: 18, color: Colors.black54),
+        ),
+      );
+    }
+
     return SizedBox(
       height: 180,
 

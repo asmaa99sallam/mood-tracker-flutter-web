@@ -42,10 +42,10 @@ class _MoodTimelineItemState extends State<MoodTimelineItem> {
         scale: scale,
 
         child: Container(
-          width: 140,
-          margin: const EdgeInsets.only(right: 16),
+          width: 120,
+          margin: const EdgeInsets.only(right: 10),
 
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(10),
 
           decoration: BoxDecoration(
             color: widget.moodColor.withOpacity(0.12),
@@ -53,33 +53,32 @@ class _MoodTimelineItemState extends State<MoodTimelineItem> {
           ),
 
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
                 widget.moodEntry.mood,
-
                 style: TextStyle(
                   color: widget.moodColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: 13,
                 ),
               ),
 
-              const SizedBox(height: 14),
+              const SizedBox(height: 10),
 
-              MoodFace(
-                mood: widget.moodEntry.mood,
-                color: widget.moodColor,
-                size: 60,
+              Expanded(
+                child: Center(
+                  child: MoodFace(
+                    mood: widget.moodEntry.mood,
+                    color: widget.moodColor,
+                    size: 42,
+                  ),
+                ),
               ),
-
-              const SizedBox(height: 14),
 
               Text(
                 "${widget.moodEntry.date.day}/${widget.moodEntry.date.month}",
-
-                style: const TextStyle(color: Colors.black54),
+                style: const TextStyle(color: Colors.black45, fontSize: 13),
               ),
             ],
           ),
